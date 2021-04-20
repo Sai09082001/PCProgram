@@ -18,9 +18,10 @@ import com.bin.pc.ui.GUI;
 public class InputDataPanel extends BasePanel {
 	private static final String BT_NO = "BT_NO";
 	private static final String BT_YES = "BT_YES";
+	private static final String BT_SUBMIT = null;
 	private JLabel lb_id, lb_model, lb_year, lb_manu, lb_comps_cpu, lb_comps_ram, lb_comps_harddisk, lb_comps_graCard, lb_title, lb_quest;
 	private JTextField tf_id, tf_model, tf_year, tf_manu, tf_comps_cpu, tf_comps_ram, tf_comps_harddisk, tf_comps_graCard;
-	private JButton bt_yes, bt_no;
+	private JButton bt_yes, bt_no, bt_submit;
 
 	@Override
 	public void initUI() {
@@ -76,12 +77,16 @@ public class InputDataPanel extends BasePanel {
 		add(lb_comps_graCard);
 		tf_comps_graCard = createTextField(tf_id.getX(), lb_comps_graCard.getY(), 300, f1, Color.BLACK);
 		add(tf_comps_graCard);
-		lb_quest = createLabel("DO YOU WANT TO CONTINUE?", lb_id.getX(), lb_comps_graCard.getY()+lb_comps_graCard.getHeight()+15, f1, Color.BLACK);
-		add(lb_quest);
-		bt_yes = createButton("YES", lb_id.getX()+100, lb_quest.getY()+lb_quest.getHeight()+15, f1, Color.BLACK, BT_YES);
-		add(bt_yes);
-		bt_no = createButton("NO", bt_yes.getX()+200, bt_yes.getY(), f1, Color.BLACK, BT_NO);
-		add(bt_no);
+//		lb_quest = createLabel("DO YOU WANT TO CONTINUE?", lb_id.getX(), lb_comps_graCard.getY()+lb_comps_graCard.getHeight()+15, f1, Color.BLACK);
+//		add(lb_quest);
+//		bt_yes = createButton("YES", lb_id.getX()+100, lb_quest.getY()+lb_quest.getHeight()+15, f1, Color.BLACK, BT_YES);
+//		add(bt_yes);
+//		bt_no = createButton("NO", bt_yes.getX()+200, bt_yes.getY(), f1, Color.BLACK, BT_NO);
+//		add(bt_no);
+		bt_submit = createButton("Submit Date", lb_id.getX(), tf_comps_graCard.getHeight()+tf_comps_graCard.getY()+15, f1, Color.BLACK, BT_SUBMIT);
+		int x = GUI.W_SIZE/2 - bt_submit.getWidth()/2;
+		bt_submit.setLocation(x, bt_submit.getY());
+		add(bt_submit);
 	}
 
 

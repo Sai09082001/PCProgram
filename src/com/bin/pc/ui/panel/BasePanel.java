@@ -68,7 +68,7 @@ public abstract class BasePanel extends JPanel implements ICommon {
 		bt.setLocation(x,y);
 		FontMetrics fm=getFontMetrics(bt.getFont());
 		
-		int w=fm.stringWidth(bt.getText())+bt.getInsets().left*2;
+		int w=fm.stringWidth(bt.getText())+bt.getInsets().left*2+10;
 		int h=fm.getHeight()+getInsets().top*2;
 		bt.setSize(w, h);
 		return bt;
