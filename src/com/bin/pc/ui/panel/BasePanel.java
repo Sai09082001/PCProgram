@@ -64,7 +64,7 @@ public abstract class BasePanel extends JPanel implements ICommon {
 			}
 
 		});
-		bt.setBackground(c);
+		bt.setForeground(c);
 		bt.setLocation(x,y);
 		FontMetrics fm=getFontMetrics(bt.getFont());
 		

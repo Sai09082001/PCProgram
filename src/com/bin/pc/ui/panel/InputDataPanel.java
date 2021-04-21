@@ -13,16 +13,40 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import com.bin.pc.logic.Comps;
+import com.bin.pc.logic.PC;
+import com.bin.pc.logic.PCManager;
+import com.bin.pc.ui.ActionClick;
 import com.bin.pc.ui.GUI;
 
 public class InputDataPanel extends BasePanel {
 	private static final String BT_NO = "BT_NO";
 	private static final String BT_YES = "BT_YES";
-	private static final String BT_SUBMIT = null;
 	private JLabel lb_id, lb_model, lb_year, lb_manu, lb_comps_cpu, lb_comps_ram, lb_comps_harddisk, lb_comps_graCard, lb_title, lb_quest;
-	private JTextField tf_id, tf_model, tf_year, tf_manu, tf_comps_cpu, tf_comps_ram, tf_comps_harddisk, tf_comps_graCard;
 	private JButton bt_yes, bt_no, bt_submit;
+	private static final String BT_SUBMIT = "BT_SUBMIT";
+	private JTextField tf_id, tf_model, tf_year, tf_manu, tf_comps_cpu, tf_comps_ram, tf_comps_harddisk, tf_comps_graCard;
+	private PCManager pcMan;
+	
+	private ActionClick callBack;
+	
 
+	public JLabel getLb_year() {
+		return lb_year;
+	}
+
+	public void setLb_year(JLabel lb_year) {
+		this.lb_year = lb_year;
+	}
+
+	public ActionClick getCallBack() {
+		return callBack;
+	}
+
+	public void setCallBack(ActionClick callBack) {
+		this.callBack = callBack;
+	}
+	
 	@Override
 	public void initUI() {
 		// TODO Auto-generated method stub
@@ -77,17 +101,36 @@ public class InputDataPanel extends BasePanel {
 		add(lb_comps_graCard);
 		tf_comps_graCard = createTextField(tf_id.getX(), lb_comps_graCard.getY(), 300, f1, Color.BLACK);
 		add(tf_comps_graCard);
-//		lb_quest = createLabel("DO YOU WANT TO CONTINUE?", lb_id.getX(), lb_comps_graCard.getY()+lb_comps_graCard.getHeight()+15, f1, Color.BLACK);
-//		add(lb_quest);
-//		bt_yes = createButton("YES", lb_id.getX()+100, lb_quest.getY()+lb_quest.getHeight()+15, f1, Color.BLACK, BT_YES);
-//		add(bt_yes);
-//		bt_no = createButton("NO", bt_yes.getX()+200, bt_yes.getY(), f1, Color.BLACK, BT_NO);
-//		add(bt_no);
+
 		bt_submit = createButton("Submit Date", lb_id.getX(), tf_comps_graCard.getHeight()+tf_comps_graCard.getY()+15, f1, Color.BLACK, BT_SUBMIT);
 		int x = GUI.W_SIZE/2 - bt_submit.getWidth()/2;
 		bt_submit.setLocation(x, bt_submit.getY());
 		add(bt_submit);
+
+	}
+	
+	@Override
+	protected void handleClick(String name) {
+		if(name.equals(BT_SUBMIT)) {
+			Comps compTemp = new Comps(tf_comps_cpu.getText(), tf_comps_ram.getText(), tf_comps_harddisk.getText(), tf_comps_graCard.getText());
+			pcMan = new PCManager();
+			pcMan.addDataTemp(tf_model.getText(), Integer.parseInt(tf_year.getText()), tf_manu.getText(), compTemp);
+			int rs = JOptionPane.showConfirmDialog(this, "Do you want to add more data?", "Confirm", JOptionPane.YES_NO_OPTION);
+			if(rs == JOptionPane.YES_OPTION) {
+				resetData();
+			}else {
+				callBack.clickSubmit(tf_id.getText(), null);
+			}
+		}
 	}
 
-
+	private void resetData() {
+		tf_comps_cpu.setText("");
+		tf_comps_graCard.setText("");
+		tf_comps_harddisk.setText("");
+		tf_comps_ram.setText("");
+		tf_manu.setText("");
+		tf_model.setText("");
+		tf_year.setText("");
+	}
 }
