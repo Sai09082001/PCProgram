@@ -39,7 +39,7 @@ public class PC {
 	public void setYear(int year) {
 		this.year = year;
 	}
-
+	
 	public String getManufacturer() {
 		return manufacturer;
 	}
@@ -55,6 +55,5 @@ public class PC {
 	public void setComps(Comps comps) {
 		this.comps = comps;
 	}
-	
 	
 }
